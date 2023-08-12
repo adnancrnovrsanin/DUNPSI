@@ -1,0 +1,10 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/" routerActiveLink="active">
+            <img src="../../assets/Logo.png" alt="Bootstrap" width="40">
+            DUNPSI
+        </a>
+
+        <button class="btn btn-outline-primary" *ngIf="!(accountService.currentUser$ | async)" routerLink="/login">Sign in</button>
+    </div>
+</nav>

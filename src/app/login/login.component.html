@@ -1,0 +1,10 @@
+<div class="bodyContainer">
+    <div class="loginContainer">
+        <p class="loginText">Login</p>
+        <form action="#" class="loginForm" [formGroup]="loginForm">
+            <input type="text" placeholder="Email" formControlName="email">
+            <input type="password" placeholder="Password" formControlName="password">
+            <button (click)="login()">Login</button>
+        </form>
+    </div>
+</div>
