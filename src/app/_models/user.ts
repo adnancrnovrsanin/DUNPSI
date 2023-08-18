@@ -1,3 +1,5 @@
+import { Photo } from "./photo";
+
 export interface User {
     id: string;
     name: string;
@@ -6,6 +8,7 @@ export interface User {
     profileImageUrl: string | null;
     role: Role;
     token: string;
+    photos: Photo[];
 };
 
 export enum Role {

@@ -1,26 +1,73 @@
 <div class="bodyContainer">
-    <div class="buttonSection" *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role !== 'SOFTWARE_COMPANY'">
+    <div class="buttonSection"
+        *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role !== 'SOFTWARE_COMPANY'">
         <div class="left">
-            <button type="button" class="btn btn-primary" (click)="turnOnEditMode()" *ngIf="!editMode">Edit Kanban</button>
-            <button type="button" class="btn btn-success" *ngIf="editMode" (click)="saveNewLayoutChanges()">Save changes</button>
+            <button type="button" class="btn btn-primary" (click)="turnOnEditMode()" *ngIf="!editMode">Edit
+                Kanban</button>
+            <button type="button" class="btn btn-success" *ngIf="editMode" (click)="saveNewLayoutChanges()">Save
+                changes</button>
             <button type="button" class="btn btn-danger" *ngIf="editMode" (click)="cancelEditMode()">Cancel</button>
         </div>
 
-        <div class="right" *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'PROJECT_MANAGER'">
-            <button type="button" class="btn btn-primary">Add a project phase</button>
+        <div class="right"
+            *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'PROJECT_MANAGER'">
+            <button type="button" class="btn btn-primary" *ngIf="!editPhasesMode" (click)="editPhasesMode = true">Edit
+                project phases</button>
+            <button type="button" class="btn btn-success" *ngIf="editPhasesMode">Add a new project phase</button>
+            <button type="button" class="btn btn-danger" *ngIf="editPhasesMode"
+                (click)="editPhasesMode = false">Cancel</button>
         </div>
     </div>
     <div cdkDropListGroup class="dropListGroup">
         <div class="boardColumnContainer" *ngFor="let projectPhase of projectPhases">
+            <button type="button" class="btn btn-danger deletePhaseBtn"
+                *ngIf="!['Requirements Analysis', 'Done'].includes(projectPhase.name) && editPhasesMode">Delete this
+                phase</button>
             <h2>{{ projectPhase.name }}</h2>
 
             <div cdkDropList [cdkDropListData]="projectPhase.requirements" class="list"
                 (cdkDropListDropped)="drop($event)">
                 <div class="box" *ngFor="let requirement of projectPhase.requirements" cdkDrag
-                    [cdkDragDisabled]="!editMode" [class.disabled]="!editMode" [class.done]="projectPhase.name === 'Done'">
+                    [cdkDragDisabled]="!editMode" [class.disabled]="!editMode"
+                    [class.done]="projectPhase.name === 'Done'"
+                    (click)="letRequirementBeClicked(requirement) && openModal(template)">
                     {{ requirement.name }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{ selectedRequirement?.name }}</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="description">
+            <h5>Description of this task:</h5>
+            {{ selectedRequirement?.description }}
+        </div>
+        <div class="developers" *ngIf="selectedRequirement?.assignedDevelopers?.length === 0">
+            <h5>Available developers for this task:</h5>
+            <div class="developer" *ngFor="let developer of freeDevelopers"
+                [class.selected]="selectedDevelopers.includes(developer)" (click)="developerClicked(developer)">
+                <p>{{ developer.name }} {{ developer.surname }}</p>
+                <p>{{ developer.position }}</p>
+            </div>
+            <button type="button" class="btn btn-success assignBtn" *ngIf="selectedDevelopers.length > 0"
+                (click)="assignDevelopers()">Assign task</button>
+        </div>
+
+        <div class="developers" *ngIf="selectedRequirement && selectedRequirement?.assignedDevelopers!.length > 0">
+            <h5>Assigned developers:</h5>
+            <div class="developer" *ngFor="let developer of selectedRequirement?.assignedDevelopers">
+                <p>{{ developer.name }} {{ developer.surname }}</p>
+                <p>{{ developer.position }}</p>
+            </div>
+        </div>
+        <!-- <button type="button" class="btn btn-primary" (click)="closeModal(1)">Close self</button> -->
+    </div>
+</ng-template>

@@ -3,15 +3,17 @@ import { DeveloperAssignmentRequest, Team } from '../_models/team';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Developer } from '../_models/profiles';
+import { ProjectService } from './project.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   selectedTeam: Team | null = null;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService, private projectService: ProjectService) { }
 
   getTeam(id: string) {
     this.http.get<Team>(this.baseUrl + 'team/' + id).subscribe({
@@ -29,12 +31,16 @@ export class TeamService {
     return this.http.get<Developer[]>(this.baseUrl + 'developer/free-developers');
   }
 
+  getFreeDevelopersForProjectTasks(projectId: string) {
+    return this.http.get<Developer[]>(this.baseUrl + 'developer/free-developers/' + projectId);
+  }
+
   assignDevelopers(teamId: string, developers: Developer[]) {
     const request: DeveloperAssignmentRequest = {
       id: teamId,
       developers
     }
-    return this.http.post<void>(this.baseUrl + 'team/developer-assignment', request);
+    return this.http.post<void>(this.baseUrl + 'requirements/developer-assignment', request);
   }
 
   clear() {

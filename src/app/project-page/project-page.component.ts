@@ -3,6 +3,7 @@ import { ProjectService } from '../_services/project.service';
 import { AccountService } from '../_services/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Role, User } from '../_models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-project-page',
@@ -13,7 +14,7 @@ export class ProjectPageComponent implements OnInit {
   id: string | null;
   user: User | null = null;
 
-  constructor(private projectService: ProjectService, public accountService: AccountService, private route: ActivatedRoute, private router: Router) { 
+  constructor(private projectService: ProjectService, public accountService: AccountService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) { 
     this.id = this.route.snapshot.paramMap.get('id') ?? null;
   }
 
@@ -33,6 +34,31 @@ export class ProjectPageComponent implements OnInit {
     else if (this.user.role === Role.DEVELOPER) return 'View Team';
     else return '';
   }
+
+  getRequirementsButtonText() {
+    if (!this.user) return '';
+
+    if (this.user.role === Role.PROJECT_MANAGER) return 'View requirements that need changes';
+    else if (this.user.role === Role.SOFTWARE_COMPANY) return 'Check created requirements';
+    else return '';
+  }
+
+  finishProject() {
+    if (this.projectService.selectedProject) {
+      this.projectService.markProjectAsFinished().subscribe({
+        next: () => {
+          this.router.navigateByUrl(`/`);
+          this.toastr.success('Project finished successfully!');
+        },
+        error: (error) => {
+          this.toastr.error(error);
+          console.log(error);
+        }
+      });
+    }
+  }
+
+  get project() { return this.projectService.selectedProject; }
 
   get canItBeFinished() { return this.projectService.canItBeFinished(); }
 

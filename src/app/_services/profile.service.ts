@@ -6,12 +6,13 @@ import { Role, User } from '../_models/user';
 import { ProjectService } from './project.service';
 import { ProjectDto } from '../_models/softwareProject';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  baseUrl = "http://localhost:5000/api/";
+  baseUrl = environment.apiUrl;
   private currentDeveloperSource = new BehaviorSubject<Developer | null>(null);
   currentDeveloper$ = this.currentDeveloperSource.asObservable();
 

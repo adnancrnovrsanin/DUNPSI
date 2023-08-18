@@ -8,8 +8,10 @@
         <div class="project" *ngFor="let project of companyProjects" routerLink="/projects/{{ project.id }}">
             <h3>{{ project.name }}</h3>
             <p>Due date: {{ project.dueDate.toLocaleDateString() }}</p>
-            <p>Assigned project manager: <br>{{ project.assignedTeam.manager.name }} {{ project.assignedTeam.manager.surname
+            <p>Assigned project manager: <br>{{ project.assignedTeam.manager.name }} {{
+                project.assignedTeam.manager.surname
                 }}</p>
+            <p class="finishedMark" *ngIf="project.finished">PROJECT FINISHED</p>
         </div>
     </div>
 </div>

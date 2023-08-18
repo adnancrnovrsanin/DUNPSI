@@ -95,10 +95,45 @@
 }
 
 .list > .box {
-  border-left: 5px solid #0F3490;
+  border-left: 5px solid #0f3490;
   margin: 10px;
 }
 
 .disabled {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
+}
+
+.deletePhaseBtn {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.disabled:hover {
+  cursor: pointer;
+  background-color: rgb(170, 170, 170);
+}
+
+.developer {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  background-color: #0f3490;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.selected {
+  background-color: #00B1C8;
+}
+
+.assignBtn {
+  width: 100%;
+  margin: 2rem 0;
 }

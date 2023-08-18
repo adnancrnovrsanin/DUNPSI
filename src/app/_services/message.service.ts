@@ -7,13 +7,14 @@ import { BusyService } from './busy.service';
 import { User } from '../_models/user';
 import { Group } from '../_models/group';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  hubUrl = "http://localhost:5000/hubs/";
-  baseUrl = "http://localhost:5000/api/";
+  hubUrl = environment.hubUrl;
+  baseUrl = environment.apiUrl;
   private hubConnection?: HubConnection;
   private messageThreadSource = new BehaviorSubject<Message[]>([]);
   messageThread$ = this.messageThreadSource.asObservable();

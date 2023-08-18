@@ -1,0 +1,10 @@
+<div class="bodyContainer">
+    <h2>Requirements on hold</h2>
+    <p *ngIf="projectHistory.length === 0">There are no such requirements here</p>
+    <div class="project" *ngFor="let project of projectHistory">
+        <div class="details">
+            <h4>{{ project.name }}</h4>
+            <p>{{ project.description }}</p>
+        </div>
+    </div>
+</div>

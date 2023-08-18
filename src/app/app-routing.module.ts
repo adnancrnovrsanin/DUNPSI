@@ -15,6 +15,8 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TeamComponent } from './team/team.component';
 import { CreateRequirementComponent } from './create-requirement/create-requirement.component';
+import { RequirementsOnHoldComponent } from './requirements-on-hold/requirements-on-hold.component';
+import { ProjectHistoryComponent } from './project-history/project-history.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +33,9 @@ const routes: Routes = [
       { path: 'projects/:id', component: ProjectPageComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'teams/:id', component: TeamComponent },
+      { path: 'history', component: ProjectHistoryComponent },
       { path: 'projects/:id/create-requirement', component: CreateRequirementComponent },
+      { path: 'projects/:id/requirements-on-hold', component: RequirementsOnHoldComponent },
     ]
   },
   { path: 'login', component: LoginComponent },

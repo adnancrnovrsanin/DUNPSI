@@ -5,12 +5,13 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, take } from 'rxjs';
 import { User } from '../_models/user';
 import { AccountService } from './account.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PresenceService {
-  hubUrl = "http://localhost:5000/hubs/";
+  hubUrl = environment.hubUrl;
   private hubConnection?: HubConnection;
   private onlineUsersSource = new BehaviorSubject<string[]>([]);
   onlineUsers$ = this.onlineUsersSource.asObservable();

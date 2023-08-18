@@ -41,3 +41,14 @@
 .kanbanBoard {
   width: 100%;
 }
+
+.finishButton {
+  width: 50%;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}

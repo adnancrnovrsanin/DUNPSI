@@ -1,6 +1,6 @@
 <div class="bodyContainer">
     <div class="pageNav">
-        <div class="pageNavLink borderRight" routerLink="/dashboard">
+        <div class="pageNavLink borderRight" routerLink="/dashboard/{{ (accountService.currentUser$ | async)?.id }}">
             Go back to dashboard
         </div>
 
@@ -15,13 +15,14 @@
         </div>
 
         <div class="pageNavLink borderLeft"
-            *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'SOFTWARE_COMPANY'">
-            Check created requirements
+            *ngIf="(accountService.currentUser$ | async) &&  ['PROJECT_MANAGER', 'SOFTWARE_COMPANY'].includes((accountService.currentUser$ | async)?.role?.toString() ?? '')"
+            routerLink="/projects/{{ project?.id }}/requirements-on-hold/">
+            {{ getRequirementsButtonText() }}
         </div>
     </div>
     <app-kanban-board class="kanbanBoard"></app-kanban-board>
 
-    <button type="button" class="btn btn-primary"
-        *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'SOFTWARE_COMPANY' && canItBeFinished">Finish
-        the project</button>
+    <button type="button" class="btn btn-success finishButton" (click)="finishProject()" (click)="finishProject()"
+        *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'SOFTWARE_COMPANY' && canItBeFinished">Mark
+        project as finished</button>
 </div>

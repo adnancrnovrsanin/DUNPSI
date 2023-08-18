@@ -34,6 +34,9 @@ import { CreateRequirementComponent } from './create-requirement/create-requirem
 import { UnapprovedRequirementsComponent } from './unapproved-requirements/unapproved-requirements.component';
 import { ProfileMessagesComponent } from './profile-messages/profile-messages.component';
 import { ProfileImageComponent } from './profile-image/profile-image.component';
+import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
+import { RequirementsOnHoldComponent } from './requirements-on-hold/requirements-on-hold.component';
+import { ProjectHistoryComponent } from './project-history/project-history.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,9 @@ import { ProfileImageComponent } from './profile-image/profile-image.component';
     UnapprovedRequirementsComponent,
     ProfileMessagesComponent,
     ProfileImageComponent,
+    PhotoEditorComponent,
+    RequirementsOnHoldComponent,
+    ProjectHistoryComponent,
   ],
   imports: [
     BrowserModule,

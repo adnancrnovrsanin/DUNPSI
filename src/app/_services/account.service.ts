@@ -10,12 +10,13 @@ import { ProjectsService } from './projects.service';
 import { ProjectService } from './project.service';
 import { TeamService } from './team.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -82,6 +83,14 @@ export class AccountService {
 
   getUserByEmail(email: string) {
     return this.http.get<User>(this.baseUrl + 'account/email/' + email);
+  }
+
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'photos/' + this.currentUserSource.getValue()?.id + '/setmain/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'photos/' + photoId);
   }
 
   logout() {

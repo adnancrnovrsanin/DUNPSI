@@ -12,6 +12,11 @@
         <tab heading="About" class="tabKlasa" (selectTab)="onTabActivated($event)">
 
         </tab>
+
+        <tab heading="Photos" class="tabKlasa" (selectTab)="onTabActivated($event)">
+            <app-photo-editor [inputUser]="user" class="photoEditor"></app-photo-editor>
+        </tab>
+
         <tab heading="Messages" class="tabKlasa" (selectTab)="onTabActivated($event)"
             *ngIf="user?.email !== currentUser?.email">
             <app-profile-messages [email]="user?.email"></app-profile-messages>

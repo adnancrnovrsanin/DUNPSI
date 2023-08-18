@@ -5,8 +5,9 @@ import { ProfileService } from '../_services/profile.service';
 import { of } from 'rxjs';
 import { Role, User } from '../_models/user';
 import { MessageService } from '../_services/message.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from '../_models/message';
+import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 
 @Component({
   selector: 'app-profile-details',
@@ -20,8 +21,10 @@ export class ProfileDetailsComponent implements OnInit, OnDestroy {
   currentUser: User | null = null;
   user: User | null = null;
   messages: Message[] = [];
+  galleryOptions: NgxGalleryOptions[] = [];
+  galleryImages: NgxGalleryImage[] = [];
 
-  constructor(private accountService: AccountService, private messageService: MessageService, private route: ActivatedRoute) { 
+  constructor(private accountService: AccountService, private messageService: MessageService, private route: ActivatedRoute, private router: Router) { 
     this.accountService.currentUser$.subscribe({
       next: user => {
         if (user) {
@@ -30,6 +33,7 @@ export class ProfileDetailsComponent implements OnInit, OnDestroy {
       }
     });
     this.id = this.route.snapshot.paramMap.get('id');
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
@@ -40,6 +44,38 @@ export class ProfileDetailsComponent implements OnInit, OnDestroy {
         }
       });
     }
+
+    this.route.queryParams.subscribe({
+      next: params => {
+        params['tab'] && this.selectTab(params['tab'])
+      }
+    })
+
+    this.galleryOptions = [
+      {
+        width: '500px',
+        height: '500px',
+        imagePercent: 100,
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        preview: false
+      }
+    ]
+
+    this.galleryImages = this.getImages();
+  }
+
+  getImages() {
+    if (!this.user) return [];
+    const imageUrls = [];
+    for (const photo of this.user.photos) {
+      imageUrls.push({
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url
+      })
+    }
+    return imageUrls;
   }
 
   get userFullName() {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProjectService } from '../_services/project.service';
 import { Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +10,12 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  userIsManager: boolean = false;
+  user: User | null = null;
 
   constructor(public accountService: AccountService, private projectService: ProjectService, private router: Router) {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
-        this.userIsManager = user?.role === "PROJECT_MANAGER";
+        this.user = user;
       },
       error: (err) => {
         console.log(err);

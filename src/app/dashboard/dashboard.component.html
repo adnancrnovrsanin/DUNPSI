@@ -1,10 +1,14 @@
 <div class="bodyContainer">
-    <div class="sidebar">
-        <div class="sidebarNav" routerLink="/projects/requests" *ngIf="userIsManager">
+    <div class="sidebar" *ngIf="user?.role !== 'SOFTWARE_COMPANY'">
+        <div class="sidebarNav" routerLink="/projects/requests" *ngIf="user?.role === 'PRODUCT_MANAGER'">
             <p>Project requests</p>
         </div>
-        <div class="sidebarNav" (click)="link()" *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role !== 'SOFTWARE_COMPANY'">
+        <div class="sidebarNav" (click)="link()"
+            *ngIf="(accountService.currentUser$ | async) && ['PROJECT_MANAGER', 'DEVELOPER'].includes((accountService.currentUser$ | async)?.role ?? '')">
             <p>Current project</p>
+        </div>
+        <div class="sidebarNav" routerLink="/history" *ngIf="user?.role === 'PROJECT_MANAGER'">
+            <p>Project history</p>
         </div>
     </div>
 

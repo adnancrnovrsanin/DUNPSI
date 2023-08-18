@@ -25,3 +25,8 @@ export enum RequirementApproveStatus {
     CHANGES_REQUIRED = 'CHANGES_REQUIRED',
     REJECTED = 'REJECTED'
 }
+
+export interface GetRequirementsOnHoldRequest {
+    projectId: string;
+    status: string;
+}

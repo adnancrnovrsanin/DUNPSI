@@ -4,14 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { ProjectManager } from '../_models/profiles';
-import { ProjectCreateDto } from '../_models/softwareProject';
+import { ProjectCreateDto, ProjectDto } from '../_models/softwareProject';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   projectRequests: InitialProjectRequest[] = [];
   selectedProjectRequest: InitialProjectRequest | null = null;
   projectManagers: ProjectManager[] = [];
@@ -21,7 +22,6 @@ export class ProjectsService {
   getProjectRequests() {
     return this.http.get<InitialProjectRequestDto[]>(this.baseUrl + 'softwareproject/project-requests').subscribe({
       next: (response) => {
-        // console.log(response);
         this.projectRequests = response.map((projectRequest) => {
           return {
             id: projectRequest.id,
@@ -150,6 +150,10 @@ export class ProjectsService {
         this.toastr.error(error);
       }
     });
+  }
+
+  getProjectHistory(managerId: string) {
+    return this.http.get<ProjectDto[]>(this.baseUrl + 'projectManager/project-history/' + managerId);
   }
 
   clear() {

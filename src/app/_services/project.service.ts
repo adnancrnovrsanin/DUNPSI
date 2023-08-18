@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectPhase, UpdateRequirementLayoutRequest } from '../_models/projectPhase';
-import { CreateRequirementRequest } from '../_models/requirement';
+import { CreateRequirementRequest, GetRequirementsOnHoldRequest, Requirement } from '../_models/requirement';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   selectedProject: Project | null = null;
   selectedProjectPhases: ProjectPhase[] = [];
 
@@ -88,6 +89,27 @@ export class ProjectService {
       }
     }
     return canItBeFinished;
+  }
+
+  getRequirementsOnHold(request: GetRequirementsOnHoldRequest) {
+    if (!this.selectedProject) return;
+    return this.http.post<Requirement[]>(this.baseUrl + 'softwareProject/requirements/' + this.selectedProject.id, request);
+  }
+
+  updateRequirementStatus(requirementId: string, status: string) {
+    return this.http.put<void>(this.baseUrl + 'requirements/' + requirementId + '/status/' + status, null);
+  }
+
+  assignDevelopersToRequirement(requirement: Requirement) {
+    return this.http.put<void>(this.baseUrl + 'requirements/developer-assignment', requirement);
+  }
+
+  updateRequirement(requirement: Requirement) {
+    return this.http.put<void>(this.baseUrl + 'requirements', requirement);
+  }
+
+  markProjectAsFinished() {
+    return this.http.put<void>(this.baseUrl + 'softwareProject/finish-project/' + this.selectedProject?.id, null);
   }
 
   clear() {

@@ -7,12 +7,13 @@ import { Project, ProjectDto } from '../_models/softwareProject';
 import { CreateInitialProjectRequest, InitialProjectRequestDto } from '../_models/projectRequest';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SoftwareCompanyService {
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   currentSoftwareCompany: SoftwareCompany | null = null;
   companyProjects: Project[] = [];
 
