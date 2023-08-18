@@ -1,0 +1,23 @@
+<div class="bodyContainer">
+    <h1>{{ projectRequest?.projectName }}</h1>
+
+    <div class="details">
+        <p>This project description: <span style="font-weight: 500;">{{ projectRequest?.projectDescription }}</span></p>
+        <p>Client requested that the project be done by <span style="font-weight: 500;">{{
+                projectRequest?.dueDate?.toLocaleDateString() }}</span></p>
+        <p>Client that requested this project is: <span style="font-weight: 500;">{{ projectRequest?.client?.companyName
+                }}</span></p>
+    </div>
+
+    <select #ref (change)="setSelectedValue($event)">
+        <option>Select the project manager that will lead the development</option>
+        <option *ngFor="let manager of freeProjectManagers" value="{{ manager.id }}">
+            {{ manager.name }} {{ manager.surname }}
+        </option>
+    </select>
+
+    <div class="buttons">
+        <button type="button" class="btn btn-success" (click)="acceptProject()">Accept project</button>
+        <button type="button" class="btn btn-danger" (click)="rejectRequest()">Decline project</button>
+    </div>
+</div>

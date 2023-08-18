@@ -1,0 +1,37 @@
+.registrationText {
+    font-size: 16px;
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.blue {
+    color: #0F3490;
+}
+
+.registrationForm {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.registrationInput {
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+}
+
+.registrationForm > button {
+    width: 100%;
+    background-color: #0F3490;
+    color: white;
+    border: none;
+    padding: 0.5rem 0;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+}

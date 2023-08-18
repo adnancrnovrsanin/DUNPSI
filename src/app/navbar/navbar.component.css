@@ -1,5 +1,18 @@
+.container {
+    height: 100%;
+}
+
 .navbar-brand {
     color: "#0F3490";
     font-size: 1.5em;
     text-transform: uppercase;
+}
+
+.rightNav {
+    height: 100%;
+}
+
+.link {
+    color: "#0F3490";
+    margin-right: 2rem;
 }

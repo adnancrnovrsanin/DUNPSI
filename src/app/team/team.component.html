@@ -1,0 +1,40 @@
+<div class="bodyContainer">
+    <div>
+        <p>This team leader: {{ team?.manager?.name }} {{ team?.manager?.surname }}</p>
+
+        <p *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'PROJECT_MANAGER' && !checkDeveloperCount()"
+            class="error">Developers needed for this team.</p>
+
+        <p>Team members:</p>
+        <ul *ngIf="checkDeveloperCount()">
+            <li *ngFor="let member of team?.developers">
+                {{ member.name }} {{ member.surname }}
+            </li>
+        </ul>
+        <p *ngIf="!checkDeveloperCount()">No developers in this team</p>
+
+        <div *ngIf="selectedDevelopers.length > 0">
+            <p>Added developers:</p>
+            <ul>
+                <li *ngFor="let member of selectedDevelopers">
+                    {{ member.name }} {{ member.surname }}
+                </li>
+            </ul>
+            <button type="button" class="btn btn-success" (click)="addDevelopers()">Confirm addition</button>
+        </div>
+    </div>
+
+    <div class="right"
+        *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'PROJECT_MANAGER'">
+        <p>These developers can be added to the team:</p>
+
+        <p *ngIf="freeDevelopersList.length === 0">There are no free developers for your team at the time.</p>
+
+        <div *ngIf="freeDevelopersList.length > 0">
+            <div *ngFor="let developer of freeDevelopersList" class="developerContainer"
+                [class.selected]="selectedDevelopers.includes(developer)" (click)="developerClicked(developer)">
+                <p>{{ developer.name }} {{ developer.surname }}</p>
+            </div>
+        </div>
+    </div>
+</div>

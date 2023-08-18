@@ -1,0 +1,15 @@
+<div class="bodyContainer">
+    <div class="header">
+        <h1>Hello {{ softwareCompany?.companyName }}</h1>
+        <button type="button" class="btn btn-primary" routerLink="create">Create a new project</button>
+    </div>
+
+    <div class="currentProjects">
+        <div class="project" *ngFor="let project of companyProjects" routerLink="/projects/{{ project.id }}">
+            <h3>{{ project.name }}</h3>
+            <p>Due date: {{ project.dueDate.toLocaleDateString() }}</p>
+            <p>Assigned project manager: <br>{{ project.assignedTeam.manager.name }} {{ project.assignedTeam.manager.surname
+                }}</p>
+        </div>
+    </div>
+</div>

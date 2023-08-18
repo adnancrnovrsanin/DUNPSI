@@ -1,0 +1,27 @@
+<div class="bodyContainer">
+    <div class="pageNav">
+        <div class="pageNavLink borderRight" routerLink="/dashboard">
+            Go back to dashboard
+        </div>
+
+        <div class="pageNavLink borderRight"
+            *ngIf="(accountService.currentUser$ | async) && ['PROJECT_MANAGER', 'DEVELOPER'].includes((accountService.currentUser$ | async)?.role?.toString() ?? '')"
+            (click)="goToTeamPage()">
+            {{ getTeamButtonText() }}
+        </div>
+
+        <div class="pageNavLink" routerLink="create-requirement">
+            Create a requirement
+        </div>
+
+        <div class="pageNavLink borderLeft"
+            *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'SOFTWARE_COMPANY'">
+            Check created requirements
+        </div>
+    </div>
+    <app-kanban-board class="kanbanBoard"></app-kanban-board>
+
+    <button type="button" class="btn btn-primary"
+        *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'SOFTWARE_COMPANY' && canItBeFinished">Finish
+        the project</button>
+</div>

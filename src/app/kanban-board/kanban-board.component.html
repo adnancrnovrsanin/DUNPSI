@@ -1,17 +1,26 @@
-<div class="example-container">
-    <h2>To do</h2>
+<div class="bodyContainer">
+    <div class="buttonSection" *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role !== 'SOFTWARE_COMPANY'">
+        <div class="left">
+            <button type="button" class="btn btn-primary" (click)="turnOnEditMode()" *ngIf="!editMode">Edit Kanban</button>
+            <button type="button" class="btn btn-success" *ngIf="editMode" (click)="saveNewLayoutChanges()">Save changes</button>
+            <button type="button" class="btn btn-danger" *ngIf="editMode" (click)="cancelEditMode()">Cancel</button>
+        </div>
 
-    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+        <div class="right" *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'PROJECT_MANAGER'">
+            <button type="button" class="btn btn-primary">Add a project phase</button>
+        </div>
     </div>
-</div>
+    <div cdkDropListGroup class="dropListGroup">
+        <div class="boardColumnContainer" *ngFor="let projectPhase of projectPhases">
+            <h2>{{ projectPhase.name }}</h2>
 
-<div class="example-container done">
-    <h2>Done</h2>
-
-    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+            <div cdkDropList [cdkDropListData]="projectPhase.requirements" class="list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="box" *ngFor="let requirement of projectPhase.requirements" cdkDrag
+                    [cdkDragDisabled]="!editMode" [class.disabled]="!editMode" [class.done]="projectPhase.name === 'Done'">
+                    {{ requirement.name }}
+                </div>
+            </div>
+        </div>
     </div>
 </div>

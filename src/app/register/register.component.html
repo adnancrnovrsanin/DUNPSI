@@ -1,0 +1,33 @@
+<p class="registrationText">Zelite da saradjujete sa nama?</p>
+<p class="registrationText blue">Registrujte se vec sada!</p>
+<form class="registrationForm" [formGroup]="registrationForm" (ngSubmit)="registrationForm.valid && onSubmit()"
+    autocomplete="off">
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['representativeName'])"
+        [label]="'Your name'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['representativeSurname'])"
+        [label]="'Your surname'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['email'])"
+        [label]="'Your email or company email'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['password'])"
+        [label]="'Password'" [type]="'password'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['confirmPassword'])"
+        [label]="'Confirm password'" [type]="'password'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['companyName'])"
+        [label]="'Company name'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['address'])"
+        [label]="'Company address'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['contact'])"
+        [label]="'Phone number'"></app-text-input>
+    <app-text-input class="registrationInput" [formControl]="$any(registrationForm.controls['web'])"
+        [label]="'Company web address'"></app-text-input>
+
+    <div class="row" *ngIf="validationErrors">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+                {{error}}
+            </li>
+        </ul>
+    </div>
+
+    <button type="submit">Register</button>
+</form>

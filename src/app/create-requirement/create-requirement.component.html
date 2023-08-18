@@ -1,0 +1,12 @@
+<div class="bodyContainer">
+    <h1>Create a new requirement</h1>
+    <form class="createRequirementForm" [formGroup]="createRequirementForm"
+        (ngSubmit)="createRequirementForm.valid && onSubmit()">
+        <app-text-input class="requirementInput" [formControl]="$any(createRequirementForm.controls['name'])"
+            [label]="'Requirement name'"></app-text-input>
+        <app-text-input class="requirementInput" [formControl]="$any(createRequirementForm.controls['description'])"
+            [label]="'Requirement description'"></app-text-input>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

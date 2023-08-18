@@ -1,0 +1,41 @@
+.bodyContainer {
+    min-height: calc(100vh - 4.4rem);
+    padding: 2rem 0;
+    width: 75%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header > button {
+    align-self: flex-end;
+}
+
+.currentProjects {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    place-items: center;
+    grid-gap: 1rem;
+    padding: 2rem 0;
+}
+
+.project {
+    border-radius: 40px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow:  10px 10px 20px #adadad,
+                -10px -10px 20px #ffffff;
+    min-width: 250px;
+    padding: 2rem;
+}
+
+.project:hover {
+    cursor: pointer;
+    background: #ffffff;
+}

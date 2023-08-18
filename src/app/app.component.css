@@ -1,0 +1,6 @@
+.bodyContainer {
+    min-height: calc(100vh - 4.4rem);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

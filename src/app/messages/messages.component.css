@@ -1,0 +1,12 @@
+.img-circle {
+    max-height: 50px;
+}
+
+.bodyContainer {
+    width: 75%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 4.5rem);
+    padding: 2rem 0;
+}

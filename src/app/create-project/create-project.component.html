@@ -1,0 +1,13 @@
+<div class="bodyContainer">
+    <h1>Create a new project</h1>
+    <form class="projectCreateForm" [formGroup]="projectCreateForm" (ngSubmit)="projectCreateForm.valid && onSubmit()">
+        <app-text-input class="projectInput" [formControl]="$any(projectCreateForm.controls['projectName'])"
+            [label]="'Project name'"></app-text-input>
+        <app-text-input class="projectInput" [formControl]="$any(projectCreateForm.controls['projectDescription'])"
+            [label]="'Project description'"></app-text-input>
+        <app-date-picker [formControl]="$any(projectCreateForm.controls['dueDate'])"
+            [label]="'Project due date'"></app-date-picker>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

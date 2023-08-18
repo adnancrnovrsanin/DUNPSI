@@ -1,0 +1,35 @@
+.bodyContainer {
+  width: 75%;
+  margin-inline: auto;
+  min-height: calc(100vh - 4.5rem);
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.error {
+  color: red;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+}
+
+.right {
+  align-self: center;
+}
+
+.developerContainer {
+  display: flex;
+  margin: 1rem 0;
+  background-color: #0F3490;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.developerContainer:hover {
+  cursor: pointer;
+  background-color: #1753ea;
+}
+
+.selected {
+  background-color: green;
+}

@@ -1,0 +1,9 @@
+<div class="bodyContainer">
+    <div class="requests">
+        <div class="projectRequest" *ngFor="let request of projectRequests" (click)="link(request)">
+            <h3>{{ request.projectName }}</h3>
+            <p>Due date: {{ request.dueDate.toLocaleDateString() }}</p>
+            <p>{{ request.client.companyName }}</p>
+        </div>
+    </div>
+</div>

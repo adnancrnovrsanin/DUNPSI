@@ -1,3 +1,5 @@
+import { Team } from "./team";
+
 export interface Project {
     id: string;
     clientId: string;
@@ -6,6 +8,7 @@ export interface Project {
     dueDate: Date;
     finished: boolean;
     assignedTeamId: string;
+    assignedTeam: Team;
 };
 
 export interface ProjectDto {
@@ -16,4 +19,10 @@ export interface ProjectDto {
     dueDate: string;
     finished: boolean;
     assignedTeamId: string;
+    assignedTeam: Team;
+}
+
+export interface ProjectCreateDto {
+    projectRequestId: string;
+    assignedProjectManager: string;
 }

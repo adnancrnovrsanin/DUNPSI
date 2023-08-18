@@ -6,6 +6,15 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './_guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectRequestsComponent } from './project-requests/project-requests.component';
+import { ProjectRequestDetailsComponent } from './project-request-details/project-request-details.component';
+import { projectRequestDetailedResolver } from './_resolvers/project-request-detailed.resolver';
+import { ProjectPageComponent } from './project-page/project-page.component';
+import { MessagesComponent } from './messages/messages.component';
+import { TeamComponent } from './team/team.component';
+import { CreateRequirementComponent } from './create-requirement/create-requirement.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,7 +23,15 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard/:id', component: DashboardComponent },
+      { path: 'projects', component: ClientDashboardComponent },
+      { path: 'projects/create', component: CreateProjectComponent },
+      { path: 'projects/requests', component: ProjectRequestsComponent },
+      { path: 'projects/requests/:id', component: ProjectRequestDetailsComponent, resolve: projectRequestDetailedResolver },
+      { path: 'projects/:id', component: ProjectPageComponent },
+      { path: 'messages', component: MessagesComponent },
+      { path: 'teams/:id', component: TeamComponent },
+      { path: 'projects/:id/create-requirement', component: CreateRequirementComponent },
     ]
   },
   { path: 'login', component: LoginComponent },

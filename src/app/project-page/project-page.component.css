@@ -1,0 +1,43 @@
+.bodyContainer {
+  width: 100%;
+  min-height: calc(100vh - 4.5rem);
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageNav {
+  /* width: 75%; */
+  margin-bottom: 4rem;
+  background-color: #00B1C8;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageNavLink {
+  color: #fff;
+  background-color: transparent;
+  height: 100%;
+  padding: 1rem 2rem;
+}
+
+.pageNavLink:hover {
+  background-color: #fff;
+  color: #00B1C8;
+  cursor: pointer;
+}
+
+.borderRight {
+  border-right: 1px solid #fff;
+}
+
+.borderLeft {
+  border-left: 1px solid #fff;
+}
+
+.kanbanBoard {
+  width: 100%;
+}

@@ -20,6 +20,20 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
+import { RegisterComponent } from './register/register.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { ProjectRequestsComponent } from './project-requests/project-requests.component';
+import { ProjectRequestDetailsComponent } from './project-request-details/project-request-details.component';
+import { ProjectPageComponent } from './project-page/project-page.component';
+import { MessagesComponent } from './messages/messages.component';
+import { TeamComponent } from './team/team.component';
+import { CreateRequirementComponent } from './create-requirement/create-requirement.component';
+import { UnapprovedRequirementsComponent } from './unapproved-requirements/unapproved-requirements.component';
+import { ProfileMessagesComponent } from './profile-messages/profile-messages.component';
+import { ProfileImageComponent } from './profile-image/profile-image.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +47,20 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
     LoginComponent,
     DashboardComponent,
     ProfileDetailsComponent,
+    RegisterComponent,
+    TextInputComponent,
+    ClientDashboardComponent,
+    CreateProjectComponent,
+    DatePickerComponent,
+    ProjectRequestsComponent,
+    ProjectRequestDetailsComponent,
+    ProjectPageComponent,
+    MessagesComponent,
+    TeamComponent,
+    CreateRequirementComponent,
+    UnapprovedRequirementsComponent,
+    ProfileMessagesComponent,
+    ProfileImageComponent,
   ],
   imports: [
     BrowserModule,

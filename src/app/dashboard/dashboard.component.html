@@ -1,13 +1,10 @@
 <div class="bodyContainer">
     <div class="sidebar">
-        <div class="sidebarNav">
-            <p>Profile</p>
+        <div class="sidebarNav" routerLink="/projects/requests" *ngIf="userIsManager">
+            <p>Project requests</p>
         </div>
-        <div class="sidebarNav">
-            <p>Kanban</p>
-        </div>
-        <div class="sidebarNav">
-            <p>Chats</p>
+        <div class="sidebarNav" (click)="link()" *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role !== 'SOFTWARE_COMPANY'">
+            <p>Current project</p>
         </div>
     </div>
 

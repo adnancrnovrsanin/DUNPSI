@@ -5,6 +5,19 @@
             DUNPSI
         </a>
 
-        <button class="btn btn-outline-primary" *ngIf="!(accountService.currentUser$ | async)" routerLink="/login">Sign in</button>
+        <div class="rightNav">
+            <button type="button" class="btn link" *ngIf="(accountService.currentUser$ | async)"
+                (click)="goToDashboard()">Dashboard</button>
+            <button type="button" class="btn link"
+                *ngIf="(accountService.currentUser$ | async) && (accountService.currentUser$ | async)?.role === 'SOFTWARE_COMPANY'"
+                routerLink="/projects">Your projects</button>
+            <button type="button" class="btn link" *ngIf="(accountService.currentUser$ | async)"
+                routerLink="/messages">Messages</button>
+            <button class="btn btn-outline-primary" *ngIf="!(accountService.currentUser$ | async)"
+                routerLink="/login">Sign
+                in</button>
+            <button class="btn btn-outline-danger" *ngIf="(accountService.currentUser$ | async)"
+                (click)="logout()">Logout</button>
+        </div>
     </div>
 </nav>
